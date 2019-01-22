@@ -2,8 +2,8 @@ package com.haohuo.lambda;
 
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 计算 集合中 DeptId 和 Type 相同的数据的num总和
@@ -45,9 +45,23 @@ public class StreamTest {
         stock5.setNum(10);
         totalStocks.add(stock5);
 
+        List<DataBean> collect = totalStocks.stream()
+                .collect(Collectors.groupingBy(e -> e.getDeptId() + ":" + e.getType()))
+                .values().stream().map(list -> list.stream().reduce(StreamTest::combine).get())
+                .collect(Collectors.toList());
+        System.out.println(collect);
+    }
 
+    public static DataBean combine(DataBean data1, DataBean data2){
+        DataBean e = new DataBean();
+        e.setDeptId(data1.getDeptId());
+        e.setType(data1.getType());
+        e.setNum(data1.getNum() + data2.getNum());
+        return e;
     }
 }
+
+
 
 @Data
 class DataBean {

@@ -7,12 +7,12 @@ package com.haohuo.lambda;
 public class WorkerInterfaceTest {
 
     public static void execute(WorkerInterface workerInterface){
-        workerInterface.doSomeWork(1);
+        System.out.println(workerInterface.doSomeWork(-1));
     }
 
     public static void main(String[] args) {
         WorkerInterface<Integer> a = x -> x < 6;
-//        execute(a);
+        execute(a);
         System.out.println(a.doSomeWork(5));
         System.out.println(a.workTest().doSomeWork(5));
     }

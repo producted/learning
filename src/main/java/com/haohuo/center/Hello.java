@@ -1,6 +1,7 @@
 package com.haohuo.center;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -20,19 +21,13 @@ public class Hello {
         list.add("3");
         list.add("4");
         list.add("5");
-        List<String> x = new ArrayList<>();
-       /* list.stream().forEach(str -> {
-            if (str.equals("2"))
-                list.remove(str);
-            x.add("4");
-        });*/
-       int count = 0;
-        for (int i = list.size()-1; i >= 0; i--) {
-            if (list.get(i).equals("3"))
-                list.remove(list.get(i));
-            count++;
+        List<String> list1 = new ArrayList<>();
+        for (String str : list) {
+            if (str.equals("3"))
+                list1.add(str);
         }
+        list.removeAll(list1);
         System.out.println(list);
-        System.out.println(count);
+
     }
 }
