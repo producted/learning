@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -31,7 +32,7 @@ public class UserServiceTest {
 
     @Test
     public void testLogin(){
-        int size = 50000;
+        int size = 1000000;
         List<User> users = new ArrayList<>();
         User user;
         for (int i = 0; i < size; i++) {
@@ -43,7 +44,7 @@ public class UserServiceTest {
             user.setSex(i%3==0?"男":"女");
             users.add(user);
         }
-        ExecutorService threadPool = Executors.newFixedThreadPool(20);
+        ExecutorService threadPool = Executors.newFixedThreadPool(10);
         threadPool.execute(() -> {
             String[] columnName = {"用户id", "姓名", "年龄", "性别", "备注"};
             Object[][] data = new Object[size][5];
@@ -56,10 +57,18 @@ public class UserServiceTest {
                 data[index][4] = u.getRemark();
                 index++;
             }
-
-            XSSFWorkbook xssfWorkbook = generateExcel("test", "test", columnName, data);
             System.out.println("完成了！！！");
+            try {
+                Thread.sleep(new Random().nextInt(2000)+1);
+                XSSFWorkbook xssfWorkbook = generateExcel("test", "test", columnName, data);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         });
+        threadPool.shutdown();
+            /*new Thread(() ->{
+
+        }).start();*/
     }
 
     private static XSSFWorkbook generateExcel(String sheetName,String title,String[] columnName, Object[][] data){
