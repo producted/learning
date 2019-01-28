@@ -55,6 +55,8 @@ public class ConvertFilter implements Filter {
     }
 }
 
+//为了防止流的获取只能获取一次，之后再获取就获取不到了，导致controller无法拿到参数，
+// 需要通HttpServletRequestWrapper的getInputStream方法来重复获取流数据
 class MyRequestWrapper extends HttpServletRequestWrapper{
     public static Logger logger = LoggerFactory.getLogger(MyRequestWrapper.class);
     byte[] body; // 报文
