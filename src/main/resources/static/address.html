@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="jquery.min.js"></script>
+<body>
+
+<input type="text" id="areaName" >
+<input type="button" value="根据输入位置搜索可能要搜索的位置" onclick="getAddInfo()">
+<br/>
+<div id="textInfo"></div>
+<script >
+    function getAddInfo()
+    {
+        $.post('http://localhost:8000/address/getAddInfo',
+            {info:$('#areaName').val()},
+            function (result) {
+            $('#textInfo').html(result);
+        })
+    }
+</script>
+</body>
+</html>
