@@ -16,4 +16,6 @@ public class User implements Serializable {
     private String name;
     private String remark;
     private String sex;
+    private String loginNum;
+    private String pwd;
 }

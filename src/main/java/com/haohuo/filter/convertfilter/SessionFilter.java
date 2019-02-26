@@ -1,3 +1,4 @@
+/*
 package com.haohuo.filter.convertfilter;
 
 import org.apache.commons.lang3.StringUtils;
@@ -12,12 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+*/
 /**
  * @ClassName ConvertFilter
  * @Description TODO
  * @Author Zhang Peike
  * @Date 2019/1/24 10:53
- **/
+ **//*
+
 @Component
 @WebFilter(filterName = "sessionFilter", urlPatterns = "/*")
 public class SessionFilter  implements Filter {
@@ -62,11 +65,13 @@ public class SessionFilter  implements Filter {
         }
     }
     
-    /**
+    */
+/**
      * @Description: 是否需要过滤
      * @Param:
      * @Author: zhangpk
-     */
+     *//*
+
     private boolean isNeedFilter(String uri) {
         boolean isNeed = true;
         for (String includeUrl : includeUrls) {
@@ -82,3 +87,4 @@ public class SessionFilter  implements Filter {
 
     }
 }
+*/
