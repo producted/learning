@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haohuo.transactional.dao.AccountMapper" >
+  <resultMap id="BaseResultMap" type="com.haohuo.beans.Account" >
+    <id column="ac_id" property="acId" jdbcType="INTEGER" />
+    <result column="ac_name" property="acName" jdbcType="VARCHAR" />
+    <result column="ac_fee" property="acFee" jdbcType="INTEGER" />
+    <result column="ac_time" property="acTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ac_id, ac_name, ac_fee, ac_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_account
+    where ac_id = #{acId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_account
+    where ac_id = #{acId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.haohuo.beans.Account" >
+    insert into t_account (ac_id, ac_name, ac_fee, 
+      ac_time)
+    values (#{acId,jdbcType=INTEGER}, #{acName,jdbcType=VARCHAR}, #{acFee,jdbcType=INTEGER}, 
+      #{acTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.haohuo.beans.Account" >
+    insert into t_account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="acId != null" >
+        ac_id,
+      </if>
+      <if test="acName != null" >
+        ac_name,
+      </if>
+      <if test="acFee != null" >
+        ac_fee,
+      </if>
+      <if test="acTime != null" >
+        ac_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="acId != null" >
+        #{acId,jdbcType=INTEGER},
+      </if>
+      <if test="acName != null" >
+        #{acName,jdbcType=VARCHAR},
+      </if>
+      <if test="acFee != null" >
+        #{acFee,jdbcType=INTEGER},
+      </if>
+      <if test="acTime != null" >
+        #{acTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.haohuo.beans.Account" >
+    update t_account
+    <set >
+      <if test="acName != null" >
+        ac_name = #{acName,jdbcType=VARCHAR},
+      </if>
+      <if test="acFee != null" >
+        ac_fee = #{acFee,jdbcType=INTEGER},
+      </if>
+      <if test="acTime != null" >
+        ac_time = #{acTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ac_id = #{acId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.haohuo.beans.Account" >
+    update t_account
+    set ac_name = #{acName,jdbcType=VARCHAR},
+      ac_fee = #{acFee,jdbcType=INTEGER},
+      ac_time = #{acTime,jdbcType=VARCHAR}
+    where ac_id = #{acId,jdbcType=INTEGER}
+  </update>
+</mapper>
