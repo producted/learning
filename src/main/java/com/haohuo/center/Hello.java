@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
+ * 移除list的最好解决方案，说说你的
  * @author zhangpeike
  * @date 21:08 2019/1/19
  */
